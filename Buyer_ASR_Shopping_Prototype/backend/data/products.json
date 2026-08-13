@@ -1,0 +1,39 @@
+[
+  { "id": "tomato",       "name": "Tomato",        "category": "Vegetables", "price": 40,  "unit": "1 kg", "available": true },
+  { "id": "potato",       "name": "Potato",        "category": "Vegetables", "price": 35,  "unit": "1 kg", "available": true },
+  { "id": "onion",        "name": "Onion",         "category": "Vegetables", "price": 38,  "unit": "1 kg", "available": true },
+  { "id": "carrot",       "name": "Carrot",        "category": "Vegetables", "price": 50,  "unit": "1 kg", "available": true },
+  { "id": "cabbage",      "name": "Cabbage",       "category": "Vegetables", "price": 30,  "unit": "1 pc", "available": true },
+  { "id": "beans",        "name": "Beans",         "category": "Vegetables", "price": 60,  "unit": "500 g", "available": true },
+  { "id": "brinjal",      "name": "Brinjal",       "category": "Vegetables", "price": 45,  "unit": "1 kg", "available": true },
+  { "id": "cucumber",     "name": "Cucumber",      "category": "Vegetables", "price": 32,  "unit": "1 kg", "available": true },
+  { "id": "spinach",      "name": "Spinach",       "category": "Vegetables", "price": 25,  "unit": "1 bunch", "available": true },
+
+  { "id": "apple",        "name": "Apple",         "category": "Fruits", "price": 120, "unit": "1 kg", "available": true },
+  { "id": "banana",       "name": "Banana",        "category": "Fruits", "price": 50,  "unit": "1 dozen", "available": true },
+  { "id": "orange",       "name": "Orange",        "category": "Fruits", "price": 90,  "unit": "1 kg", "available": true },
+  { "id": "mango",        "name": "Mango",         "category": "Fruits", "price": 150, "unit": "1 kg", "available": true },
+  { "id": "grapes",       "name": "Grapes",        "category": "Fruits", "price": 110, "unit": "500 g", "available": true },
+  { "id": "watermelon",   "name": "Watermelon",    "category": "Fruits", "price": 45,  "unit": "1 pc", "available": true },
+
+  { "id": "milk",         "name": "Milk",          "category": "Dairy", "price": 30,  "unit": "1 L", "available": true },
+  { "id": "curd",         "name": "Curd",          "category": "Dairy", "price": 40,  "unit": "500 g", "available": true },
+  { "id": "butter",       "name": "Butter",        "category": "Dairy", "price": 55,  "unit": "100 g", "available": true },
+  { "id": "cheese",       "name": "Cheese",        "category": "Dairy", "price": 120, "unit": "200 g", "available": true },
+  { "id": "paneer",       "name": "Paneer",        "category": "Dairy", "price": 90,  "unit": "200 g", "available": true },
+
+  { "id": "coriander",    "name": "Coriander",     "category": "Greens", "price": 10, "unit": "1 bunch", "available": true },
+  { "id": "mint",         "name": "Mint",          "category": "Greens", "price": 10, "unit": "1 bunch", "available": true },
+  { "id": "curry_leaves", "name": "Curry Leaves",  "category": "Greens", "price": 8,  "unit": "1 bunch", "available": true },
+
+  { "id": "rice",         "name": "Rice",          "category": "Groceries", "price": 70,  "unit": "1 kg", "available": true },
+  { "id": "wheat_flour",  "name": "Wheat Flour",   "category": "Groceries", "price": 45,  "unit": "1 kg", "available": true },
+  { "id": "sugar",        "name": "Sugar",         "category": "Groceries", "price": 42,  "unit": "1 kg", "available": true },
+  { "id": "salt",         "name": "Salt",          "category": "Groceries", "price": 20,  "unit": "1 kg", "available": true },
+  { "id": "dal",          "name": "Dal",           "category": "Groceries", "price": 110, "unit": "1 kg", "available": true },
+  { "id": "cooking_oil",  "name": "Cooking Oil",   "category": "Groceries", "price": 165, "unit": "1 L", "available": true },
+
+  { "id": "water",        "name": "Water",         "category": "Beverages", "price": 20, "unit": "1 L", "available": true },
+  { "id": "juice",        "name": "Juice",         "category": "Beverages", "price": 60, "unit": "1 L", "available": true },
+  { "id": "tea",          "name": "Tea",           "category": "Beverages", "price": 80, "unit": "250 g", "available": true }
+]

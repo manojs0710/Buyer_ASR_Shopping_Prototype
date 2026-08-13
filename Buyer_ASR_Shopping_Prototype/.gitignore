@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.pyc
+venv/
+.venv/
+env/
+
+# Environment secrets
+.env
+
+# Recorded test audio from test_asr_local.py
+backend/recorded_audio.wav
+
+# Hugging Face / PyTorch model cache (if downloaded locally instead of the global cache)
+backend/models/
+*.pt
+*.bin
+
+# OS/editor
+.DS_Store
+*.swp
+.vscode/
+.idea/

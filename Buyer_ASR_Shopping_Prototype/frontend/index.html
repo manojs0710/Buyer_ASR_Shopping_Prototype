@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Buyer App · Grocery Shopping</title>
+<meta name="description" content="Buyer Application — browse, search, or shop by voice.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ================= TOAST CONTAINER ================= -->
+<div class="toast-container" id="toast-container" aria-live="polite"></div>
+
+<!-- ================= HEADER ================= -->
+<header class="header">
+  <div class="header-inner">
+    <div class="brand">
+      <span class="brand-mark">🛒</span>
+      <span class="brand-word">Buyer<strong>App</strong></span>
+    </div>
+
+    <div class="search-wrap">
+      <svg class="search-icon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+      <input type="text" id="search-input" placeholder="Search products…" autocomplete="off">
+      <button class="search-clear" id="search-clear" hidden aria-label="Clear search">✕</button>
+    </div>
+
+    <div class="header-actions">
+      <button class="mic-header-btn" id="mic-btn" title="Shop with Voice">
+        <span class="mic-header-icon">🎙️</span>
+        <span class="mic-header-label">Shop with Voice</span>
+      </button>
+
+      <button class="cart-btn" id="cart-btn" aria-label="Open cart">
+        <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg>
+        <span class="cart-badge" id="cart-badge" hidden>0</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- CATEGORY NAV -->
+  <nav class="category-nav" id="category-nav">
+    <button class="category-pill active" data-category="All">All</button>
+    <!-- more categories injected by script.js -->
+  </nav>
+</header>
+
+<!-- ================= MAIN ================= -->
+<main class="main">
+
+  <section class="intro">
+    <h1>Fresh groceries, made simple.</h1>
+    <p>Browse the catalog, search by name, or just tell the Copilot what you need — "Add two apples and one litre of milk."</p>
+  </section>
+
+  <section class="catalog-section">
+    <div class="catalog-head">
+      <h2 id="catalog-title">All Products</h2>
+      <span class="catalog-count" id="catalog-count">32 items</span>
+    </div>
+
+    <div class="product-grid" id="product-grid">
+      <!-- product cards injected by script.js -->
+    </div>
+
+    <div class="empty-state" id="empty-state" hidden>
+      <span class="empty-icon">🔍</span>
+      <h3>No products found</h3>
+      <p id="empty-state-text">Try a different search term or category.</p>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <p>Buyer Application — Working Prototype. Voice search powered by Lokii99/zaraaqtest via Hugging Face Transformers.</p>
+</footer>
+
+<!-- ================= CART SIDEBAR ================= -->
+<div class="cart-overlay" id="cart-overlay" hidden></div>
+<aside class="cart-panel" id="cart-panel">
+  <div class="cart-panel-head">
+    <h2>Your Cart</h2>
+    <button class="icon-btn" id="cart-close" aria-label="Close cart">✕</button>
+  </div>
+
+  <div class="cart-items" id="cart-items">
+    <!-- cart line items injected by script.js -->
+  </div>
+
+  <div class="cart-empty" id="cart-empty" hidden>
+    <span class="empty-icon">🛒</span>
+    <h3>Your cart is empty</h3>
+    <p>Add products from the catalog or try voice search.</p>
+  </div>
+
+  <div class="cart-footer" id="cart-footer">
+    <div class="cart-row">
+      <span>Subtotal</span>
+      <span class="mono" id="cart-subtotal">₹0</span>
+    </div>
+    <div class="cart-row cart-row-total">
+      <span>Total</span>
+      <span class="mono" id="cart-total">₹0</span>
+    </div>
+    <div class="cart-actions">
+      <button class="btn btn-ghost" id="cart-clear-btn">Clear Cart</button>
+      <button class="btn btn-primary" id="cart-checkout-btn">Proceed to Checkout</button>
+    </div>
+  </div>
+</aside>
+
+<!-- ================= VOICE MODAL (hidden until mic click) ================= -->
+<div class="voice-modal-overlay" id="voice-modal-overlay" hidden>
+  <div class="voice-modal" role="dialog" aria-modal="true" aria-label="Voice shopping">
+    <button class="icon-btn voice-modal-close" id="voice-modal-close" aria-label="Close">✕</button>
+
+    <!-- STATE: idle / requesting permission -->
+    <div class="voice-state" id="voice-state-idle">
+      <div class="mic-orb"><span>🎙️</span></div>
+      <h2>Shop with Voice</h2>
+      <p>Try saying: <em>"Add two apples and one litre of milk."</em></p>
+      <button class="btn btn-primary btn-lg" id="voice-start-btn">Start Listening</button>
+    </div>
+
+    <!-- STATE: recording -->
+    <div class="voice-state" id="voice-state-recording" hidden>
+      <div class="rec-indicator"><span class="rec-dot"></span>Listening…</div>
+      <div class="waveform" id="waveform">
+        <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+      </div>
+      <div class="rec-timer" id="rec-timer">00:00</div>
+      <div class="voice-actions">
+        <button class="btn btn-ghost" id="voice-cancel-btn">Cancel</button>
+        <button class="btn btn-danger" id="voice-stop-btn">Stop Recording</button>
+      </div>
+    </div>
+
+    <!-- STATE: processing -->
+    <div class="voice-state" id="voice-state-processing" hidden>
+      <div class="processing-spinner"></div>
+      <h2 id="processing-label">Understanding your voice…</h2>
+      <p>Running speech through Zaraaq ASR.</p>
+    </div>
+
+    <!-- STATE: result -->
+    <div class="voice-state" id="voice-state-result" hidden>
+      <span class="result-icon" id="result-icon">✅</span>
+      <p class="you-said-label">You said</p>
+      <p class="you-said-text" id="you-said-text">—</p>
+
+      <div class="result-items" id="result-items"></div>
+      <div class="result-errors" id="result-errors" hidden></div>
+
+      <div class="voice-actions">
+        <button class="btn btn-ghost" id="voice-again-btn">Try Again</button>
+        <button class="btn btn-primary" id="voice-done-btn">Done</button>
+      </div>
+    </div>
+
+    <!-- STATE: error -->
+    <div class="voice-state" id="voice-state-error" hidden>
+      <span class="result-icon">⚠️</span>
+      <h2>Something went wrong</h2>
+      <p id="voice-error-text">Sorry, I couldn't understand the audio. Please try again.</p>
+      <div class="voice-actions">
+        <button class="btn btn-primary" id="voice-retry-btn">Try Again</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
